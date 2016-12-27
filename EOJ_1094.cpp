@@ -37,6 +37,7 @@ bool isPrime(LL n){
 		if(!test(n,a[i],n-1)) return false;
 	return true;
 }
+
 int main()  
 {  
     long long n;  
