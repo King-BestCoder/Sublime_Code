@@ -77,9 +77,9 @@ typedef struct Vec{
         }
         size++;
     }
-    void print(int i){
+    void print(int ran,int i){
         for(int j=0;j<size;j++){
-            fprintf(fout,"%s %s\n",s[j],word_s[i]);
+            fprintf(fout,"%s %d %s\n",s[j],ran+1,word_s[i]);
         }
     }
 }vec;
@@ -94,7 +94,8 @@ bool cmp(node a,node b){
 int main(int argc, char const *argv[])
 {
     char s[len],str[len];
-    char fname[1000];
+    char fname[1000],filename[25];
+    memset(filename,0,sizeof(filename));
     struct trie t;
     FILE *fin;
     fin=fopen("C:\\Users\\ASUS\\Desktop\\DataWork\\Querytask1.txt","r");
@@ -116,13 +117,14 @@ int main(int argc, char const *argv[])
     for(int i=0;i<=filenum;i++){
         if(i%10000==0) printf("%d\n",i);
         sprintf(fname,"C:\\Users\\ASUS\\Desktop\\DataWork\\BigData\\processed\\processed\\report%d.xml",i);
+        sprintf(filename,"report%d",i);
         fin=fopen(fname,"r");
         memset(tmp,0,sizeof(tmp));
         if(fin==NULL) printf("%d\n",i);
         while(fscanf(fin,"%s",tmp)!=EOF){
             if(t.sub_str(tmp)){
                 // printf("%d\n",i);
-                name[num[Hash(tmp)]].insert(fname);
+                name[num[Hash(tmp)]].insert(filename);
                 xxx[num[Hash(tmp)]].cnt++;
             }
         }
@@ -132,10 +134,10 @@ int main(int argc, char const *argv[])
     for(int i=0;i<10;i++){
         printf("%d %d\n",xxx[i].cnt,xxx[i].id);
     }
-    fout=fopen("Answer_task3_10152130155.txt","w");
+    fout=fopen("task3_10152130155.txt","w");
     for(int i=0;i<10;i++){
         printf("%d\n",xxx[i].id);
-        name[xxx[i].id].print(xxx[i].id);
+        name[xxx[i].id].print(i,xxx[i].id);
     }
     printf("%.2f\n",(double)clock()/CLOCKS_PER_SEC);
     return 0;

@@ -84,7 +84,8 @@ vec name[30];
 int main(int argc, char const *argv[])
 {
     char s[len],str[len];
-    char fname[1000];
+    char fname[1000],filename[25];
+    memset(filename,0,sizeof(filename));
     struct trie t;
     FILE *fin;
     fin=fopen("C:\\Users\\ASUS\\Desktop\\DataWork\\Querytask1.txt","r");
@@ -115,18 +116,19 @@ int main(int argc, char const *argv[])
         // printf("%d\n",i);
         sprintf(fname,"C:\\Users\\ASUS\\Desktop\\DataWork\\BigData\\processed\\processed\\report%d.xml",i);
         // printf("%s\n",fname);
+        sprintf(filename,"report%d",i);
         fin=fopen(fname,"r");
         memset(tmp,0,sizeof(tmp));
         if(fin==NULL) printf("%d\n",i);
         while(fscanf(fin,"%s",tmp)!=EOF){
             if(t.sub_str(tmp)){
                 // printf("%d\n",i);
-                name[num[Hash(tmp)]].insert(fname);
+                name[num[Hash(tmp)]].insert(filename);
             }
         }
         fclose(fin);
     }
-    fout=fopen("Answer_task1_10152130155.txt","w");
+    fout=fopen("task1_10152130155.txt","w");
     for(int i=0;i<30;i++){
         name[i].print(i);
     }
